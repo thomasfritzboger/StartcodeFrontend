@@ -85,11 +85,27 @@ function apiFacade() {
       .then((data) => callback(data));
   };
 
+  const createBoat = async (boat, callback) => {
+    const options = makeOptions("POST", true, boat);
+    return await fetch(URL + "boats/", options)
+      .then(handleHttpErrors)
+      .then((data) => callback(data));
+  };
+
   const putUser = async (user, userId, callback) => {
     const options = makeOptions("PUT", true, user);
     return await fetch(URL + "users/" + userId, options)
       .then(handleHttpErrors)
       .then((data) => callback(data));
+  };
+
+  const putHarborOnBoat = async (boatId, harborId) => {
+    const options = makeOptions("PUT", true);
+
+    return await fetch(
+      URL + "boats/" + boatId + "/harbor/" + harborId,
+      options
+    ).then(handleHttpErrors);
   };
 
   const deleteUser = async (userId, callback) => {
@@ -99,10 +115,43 @@ function apiFacade() {
       .then(() => callback(userId));
   };
 
+  const deleteBoat = async (boatId, callback) => {
+    const options = makeOptions("DELETE", true);
+    return await fetch(URL + "boats/" + boatId, options)
+      .then(handleHttpErrors)
+      .then(() => callback(boatId));
+  };
+
   const getUsers = async (callback) => {
     const options = makeOptions("GET", true);
 
     return await fetch(URL + "users/", options)
+      .then(handleHttpErrors)
+      .then((data) => callback(data));
+  };
+
+  // const getBoats = async (callback) => {
+  //   const options = makeOptions("GET", true);
+  //   return await fetch(URL + "boats/", options)
+  //     .then(handleHttpErrors)
+  //     .then((data) => callback(data));
+  // };
+
+  const getBoats = async () => {
+    const options = makeOptions("GET", true);
+    return await fetch(URL + "boats/", options).then(handleHttpErrors);
+  };
+
+  const getOwners = async (callback) => {
+    const options = makeOptions("GET", true);
+    return await fetch(URL + "owners/", options)
+      .then(handleHttpErrors)
+      .then((data) => callback(data));
+  };
+
+  const getHarbors = async (callback) => {
+    const options = makeOptions("GET", true);
+    return await fetch(URL + "harbors/", options)
       .then(handleHttpErrors)
       .then((data) => callback(data));
   };
@@ -150,10 +199,16 @@ function apiFacade() {
     fetchData,
     getUsername,
     createUser,
+    createBoat,
     putUser,
+    putHarborOnBoat,
     deleteUser,
+    deleteBoat,
     getRoles,
     getUsers,
+    getOwners,
+    getBoats,
+    getHarbors,
   };
 }
 const facade = apiFacade();

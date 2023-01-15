@@ -8,6 +8,8 @@ import Error from "./components/navLinks/Error.jsx";
 import Profile from "./components/navLinks/Profile.jsx";
 import facade from "./facades/apiFacade";
 import SimpleUsers from "./components/SimpleUsers.jsx";
+import Owners from "./components/Owners";
+import Boats from "./components/Boats";
 
 const App = () => {
   const [loggedIn, setLoggedIn] = useState(false);
@@ -39,6 +41,8 @@ const App = () => {
           }
         />
         <Route path="simple-users" element={<SimpleUsers />} />
+        <Route path="owners" element={<Owners />} />
+        <Route path="boats" element={<Boats />} />
         <Route
           path="profile"
           element={<Profile loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}

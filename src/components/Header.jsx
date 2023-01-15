@@ -4,6 +4,7 @@ import { NavLink, useLocation } from "react-router-dom";
 import "../styles/header.css";
 import LoggedInNavBar from "./loginComponents/LoggedInNavBar.jsx";
 import Login from "./loginComponents/Login.jsx";
+import Owners from "./Owners";
 
 function Header({ loggedIn, setErrorMsg, setLoggedIn, roles }) {
   return (
@@ -12,11 +13,17 @@ function Header({ loggedIn, setErrorMsg, setLoggedIn, roles }) {
         <i className="fa fa-fw fa-home"></i> Home
       </NavLink>
 
-        {loggedIn && roles.includes("admin") && (
-      <NavLink to="/users">
-        <i className="fa fa-fw fa-search"></i> Users
-      </NavLink>
-        )}
+      {loggedIn && roles.includes("user") && (
+        <NavLink to="/owners">
+          <i className="fa fa-fw fa-user"></i>Owners
+        </NavLink>
+      )}
+
+      {loggedIn && roles.includes("admin") && (
+        <NavLink to="/users">
+          <i className="fa fa-fw fa-search"></i> Users
+        </NavLink>
+      )}
 
       <NavLink to="/contact">
         <i className="fa fa-fw fa-envelope"></i> Contact
@@ -25,6 +32,12 @@ function Header({ loggedIn, setErrorMsg, setLoggedIn, roles }) {
       {loggedIn && roles.includes("admin") && (
         <NavLink to="/simple-users">
           <i className="fa fa-fw fa-user"></i>Simple Users
+        </NavLink>
+      )}
+
+      {loggedIn && roles.includes("admin") && (
+        <NavLink to={"/boats"}>
+          <i className="fa fa-fw fa-id-badge"></i> Boats
         </NavLink>
       )}
 

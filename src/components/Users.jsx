@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import facade from "../facades/apiFacade";
 import AllUsers from "./AllUsers.jsx";
 
-function Users(props) {
+function Users() {
   const [user, setUser] = useState({ age: 0, username: "", password: "" });
   const [users, setUsers] = useState([]);
 
@@ -19,17 +19,16 @@ function Users(props) {
   };
 
   const onSubmit = (event) => {
-
-          facade.createUser(user, (userFromEndpoint) => {
-              setUsers([...users, userFromEndpoint]);
-          });
-          setUser({ age: 0, password: "", username: "" });
-          event.preventDefault();
-  }
+    facade.createUser(user, (userFromEndpoint) => {
+      setUsers([...users, userFromEndpoint]);
+    });
+    setUser({ age: 0, password: "", username: "" });
+    event.preventDefault();
+  };
 
   const updateUser = (user, userId, event) => {
     facade.putUser(user, userId, (userFromApi) => {
-        console.log(userFromApi+ "!!!!!!!")
+      console.log(userFromApi + "!!!!!!!");
       setUsers(users.map((user) => (user.id !== userId ? user : userFromApi)));
     });
     event.preventDefault();
@@ -45,7 +44,7 @@ function Users(props) {
   return (
     <div>
       <h3 style={{ textAlign: "center" }}>Create User</h3>
-      <form style={{ textAlign: "center" }}  >
+      <form style={{ textAlign: "center" }}>
         <input
           id="age"
           type="number"
@@ -70,9 +69,8 @@ function Users(props) {
           onChange={onInputChange}
           required
         />
-        <button type="submit" onClick={onSubmit}
-
-        >Create
+        <button type="submit" onClick={onSubmit}>
+          Create
         </button>
       </form>
 
